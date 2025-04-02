@@ -1,0 +1,33 @@
+{
+  "name": "gharsofa-server",
+  "version": "1.0.0",
+  "description": "GharSofa e-commerce platform server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.4",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.3.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "google-auth-library": "^9.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.1",
+    "nodemailer": "^6.9.14",
+    "otp-generator": "^4.0.1",
+    "pdfkit": "^0.15.0",
+    "razorpay": "^2.9.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
