@@ -41,42 +41,32 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const {email, password} = req.body;
     if (!email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({message: "All fields are required"});
     }
-
-    const userData = await Users.findOne({ email });
+    
+    const userData = await Users.findOne({email});
     if (!userData) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({message: "Invalid email or password"});
     }
 
     const matchPassword = await bcrypt.compare(password, userData.password);
     if (!matchPassword) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({message: "Invalid email or password"});
     }
 
-    // Generate JWT Token
-    const token = generateToken(userData);
-
-    // Set the token as a cookie
-    res.cookie("jwtToken", token, {
-      httpOnly: true,       // Prevents JavaScript access
-      secure: true,         // Required for HTTPS (Railway uses HTTPS)
-      sameSite: "None",     // Required for cross-origin requests with credentials
-      maxAge: 3600000,      // Optional: Set cookie expiration (1 hour)
-    });
-
-    const userResponse = { ...userData.toObject() };
+    generateToken(res, userData);
+    const userResponse = {...userData.toObject()};
     delete userResponse.password;
 
     return res.status(200).json({
-      message: "Login successful",
-      userData: userResponse,
+      message: "Login successful", 
+      userData: userResponse
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: "Login failed" });
+    return res.status(500).json({message: "Login failed"});
   }
 };
 
